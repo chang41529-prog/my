@@ -1,0 +1,41 @@
+[
+  {
+    "id": "sample-1",
+    "title": "Blonde",
+    "artist": "Frank Ocean",
+    "year": 2016,
+    "genres": ["R&B", "Pop", "Alternative"],
+    "format": "2LP",
+    "cover": "https://upload.wikimedia.org/wikipedia/en/a/a0/Blonde_-_Frank_Ocean.jpeg",
+    "description": "프랭크 오션의 두 번째 정규 앨범. 절제된 사운드와 내밀한 정서가 돋보인다.",
+    "tracks": ["Nikes", "Ivy", "Pink + White", "Solo", "Nights"],
+    "createdAt": "2026-03-08T00:00:00.000Z",
+    "updatedAt": "2026-03-08T00:00:00.000Z"
+  },
+  {
+    "id": "sample-2",
+    "title": "Future Nostalgia",
+    "artist": "Dua Lipa",
+    "year": 2020,
+    "genres": ["Pop", "Disco", "Dance"],
+    "format": "LP",
+    "cover": "https://upload.wikimedia.org/wikipedia/en/f/f5/Dua_Lipa_-_Future_Nostalgia_%28Official_Album_Cover%29.png",
+    "description": "복고적인 디스코 감성과 현대적인 팝 프로덕션이 결합된 앨범.",
+    "tracks": ["Future Nostalgia", "Don't Start Now", "Cool", "Physical", "Levitating"],
+    "createdAt": "2026-03-08T00:00:00.000Z",
+    "updatedAt": "2026-03-08T00:00:00.000Z"
+  },
+  {
+    "id": "sample-3",
+    "title": "Sunday at the Village Vanguard",
+    "artist": "Bill Evans Trio",
+    "year": 1961,
+    "genres": ["Jazz", "Live"],
+    "format": "LP",
+    "cover": "https://upload.wikimedia.org/wikipedia/en/4/4f/Sunday_at_the_Village_Vanguard.jpg",
+    "description": "빌 에반스 트리오의 대표적인 라이브 재즈 명반.",
+    "tracks": ["Gloria's Step", "My Man's Gone Now", "Solar", "Alice in Wonderland"],
+    "createdAt": "2026-03-08T00:00:00.000Z",
+    "updatedAt": "2026-03-08T00:00:00.000Z"
+  }
+]
