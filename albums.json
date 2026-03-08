@@ -1,0 +1,50 @@
+[
+  {
+    "id": "sample-1",
+    "title": "Blonde",
+    "artist": "Frank Ocean",
+    "year": 2016,
+    "genre": "R&B, Pop",
+    "format": "2LP",
+    "cover": "https://upload.wikimedia.org/wikipedia/en/a/a0/Blonde_-_Frank_Ocean.jpeg",
+    "description": "섬세한 사운드 디자인과 내밀한 감정선이 인상적인 현대 R&B 앨범입니다.",
+    "tracks": [
+      "1. Nikes",
+      "2. Ivy",
+      "3. Pink + White"
+    ],
+    "addedAt": "2026-03-01T09:00:00.000Z"
+  },
+  {
+    "id": "sample-2",
+    "title": "Future Nostalgia",
+    "artist": "Dua Lipa",
+    "year": 2020,
+    "genre": "Pop, Disco",
+    "format": "LP",
+    "cover": "https://upload.wikimedia.org/wikipedia/en/f/f5/Dua_Lipa_-_Future_Nostalgia_%28Official_Album_Cover%29.png",
+    "description": "복고적 디스코 감각과 현대 팝 프로덕션이 잘 결합된 앨범입니다.",
+    "tracks": [
+      "1. Future Nostalgia",
+      "2. Don't Start Now",
+      "3. Physical"
+    ],
+    "addedAt": "2026-03-02T09:00:00.000Z"
+  },
+  {
+    "id": "sample-3",
+    "title": "Sunday at the Village Vanguard",
+    "artist": "Bill Evans Trio",
+    "year": 1961,
+    "genre": "Jazz",
+    "format": "LP",
+    "cover": "https://upload.wikimedia.org/wikipedia/en/0/08/Sunday_at_the_Village_Vanguard.jpg",
+    "description": "재즈 라이브 음반의 대표작 가운데 하나로 자주 언급되는 앨범입니다.",
+    "tracks": [
+      "1. Gloria's Step",
+      "2. My Man's Gone Now",
+      "3. Solar"
+    ],
+    "addedAt": "2026-03-03T09:00:00.000Z"
+  }
+]

@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>lphang LP Archive</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="hero card">
+      <div class="hero-copy-wrap">
+        <p class="eyebrow">PERSONAL VINYL CATALOG</p>
+        <h1>lphang LP Archive</h1>
+        <p class="hero-copy">
+          앨범명, 아티스트, 수록곡으로 빠르게 찾을 수 있는 개인 LP 아카이브입니다.
+          Discogs 검색 연동으로 새 앨범을 더 간편하게 추가할 수 있도록 구성했습니다.
+        </p>
+        <div class="hero-actions">
+          <button id="scrollToDiscogsBtn" class="btn btn-primary">Discogs로 빠른 추가</button>
+          <button id="scrollToCollectionBtn" class="btn btn-secondary">내 컬렉션 보기</button>
+        </div>
+      </div>
+      <div class="hero-stats-grid">
+        <div class="stat-box">
+          <span class="stat-label">Records</span>
+          <strong id="recordCount">0</strong>
+        </div>
+        <div class="stat-box">
+          <span class="stat-label">Genres</span>
+          <strong id="genreCount">0</strong>
+        </div>
+      </div>
+    </header>
+
+    <main class="page-grid">
+      <aside class="left-column">
+        <section class="card panel sticky-panel">
+          <div class="panel-header compact-gap">
+            <div>
+              <p class="section-kicker">Search</p>
+              <h2>컬렉션 검색</h2>
+            </div>
+          </div>
+
+          <label for="searchInput">통합 검색</label>
+          <input id="searchInput" type="text" placeholder="앨범명, 아티스트, 수록곡 검색" />
+
+          <div class="grid-2 compact-grid">
+            <div>
+              <label for="genreFilter">장르 필터</label>
+              <select id="genreFilter">
+                <option value="all">전체</option>
+              </select>
+            </div>
+            <div>
+              <label for="sortSelect">정렬</label>
+              <select id="sortSelect">
+                <option value="added-desc">최근 추가순</option>
+                <option value="year-desc">발매년도 최신순</option>
+                <option value="year-asc">발매년도 오래된순</option>
+                <option value="title-asc">앨범명 오름차순</option>
+                <option value="artist-asc">아티스트 오름차순</option>
+                <option value="genre-asc">장르순</option>
+              </select>
+            </div>
+          </div>
+
+          <button id="resetFiltersBtn" class="btn btn-secondary full">필터 초기화</button>
+
+          <div class="divider"></div>
+
+          <div class="stack-actions">
+            <button id="exportBtn" class="btn btn-primary full">JSON 내보내기</button>
+            <label class="file-upload btn btn-secondary full" for="importInput">JSON 불러오기</label>
+            <input id="importInput" type="file" accept="application/json" hidden />
+            <button id="reloadSampleBtn" class="btn btn-secondary full">기본 샘플 다시 불러오기</button>
+            <button id="clearAllBtn" class="btn btn-danger full">전체 초기화</button>
+          </div>
+          <p class="helper-text">저장 데이터와 Discogs 키 정보는 현재 브라우저에만 저장됩니다.</p>
+        </section>
+      </aside>
+
+      <section class="right-column">
+        <section id="discogsSection" class="card panel accent-panel">
+          <div class="panel-header">
+            <div>
+              <p class="section-kicker">Quick Add</p>
+              <h2>Discogs 검색으로 앨범 추가</h2>
+            </div>
+            <button id="toggleApiHelpBtn" class="text-btn" type="button">설정 안내</button>
+          </div>
+
+          <div id="apiHelpBox" class="info-box hidden">
+            <p>
+              Discogs에서 발급한 Consumer Key / Secret을 입력하면 검색 결과에서 바로 컬렉션에 추가할 수 있습니다.
+            </p>
+            <p class="helper-text no-margin">
+              키는 이 브라우저에만 저장되며 GitHub Pages 정적 사이트에는 서버가 없어서 개인별로 직접 입력해야 합니다.
+            </p>
+          </div>
+
+          <div class="grid-2 compact-grid">
+            <div>
+              <label for="discogsKey">Discogs Consumer Key</label>
+              <input id="discogsKey" type="text" placeholder="예: abcdef123456" />
+            </div>
+            <div>
+              <label for="discogsSecret">Discogs Consumer Secret</label>
+              <input id="discogsSecret" type="password" placeholder="예: 123456abcdef" />
+            </div>
+          </div>
+          <div class="inline-actions compact-actions">
+            <button id="saveApiKeysBtn" class="btn btn-secondary" type="button">키 저장</button>
+            <button id="clearApiKeysBtn" class="btn btn-secondary" type="button">키 삭제</button>
+          </div>
+
+          <label for="discogsSearchInput">앨범 검색</label>
+          <div class="search-bar-row">
+            <input id="discogsSearchInput" type="text" placeholder="예: Blonde Frank Ocean" />
+            <button id="discogsSearchBtn" class="btn btn-primary" type="button">검색</button>
+          </div>
+          <p id="discogsStatus" class="helper-text no-margin">검색어를 입력하면 Discogs 결과를 불러옵니다.</p>
+
+          <div id="discogsResults" class="discogs-results"></div>
+        </section>
+
+        <section class="card panel form-panel">
+          <div class="panel-header">
+            <div>
+              <p class="section-kicker">Manual Add</p>
+              <h2 id="formTitle">수동으로 앨범 등록</h2>
+            </div>
+            <div class="inline-actions compact-actions">
+              <span id="editingBadge" class="badge hidden">수정 중</span>
+              <button id="cancelEditBtn" class="btn btn-secondary hidden" type="button">수정 취소</button>
+            </div>
+          </div>
+
+          <form id="albumForm">
+            <div class="grid-2">
+              <div>
+                <label for="title">앨범 제목</label>
+                <input id="title" name="title" type="text" required />
+              </div>
+              <div>
+                <label for="artist">아티스트</label>
+                <input id="artist" name="artist" type="text" required />
+              </div>
+            </div>
+            <div class="grid-4">
+              <div>
+                <label for="year">발매 연도</label>
+                <input id="year" name="year" type="number" min="1900" max="2100" placeholder="예: 1994" />
+              </div>
+              <div>
+                <label for="genre">장르</label>
+                <input id="genre" name="genre" type="text" placeholder="예: Jazz, Soul" />
+              </div>
+              <div>
+                <label for="format">포맷</label>
+                <input id="format" name="format" type="text" placeholder="예: LP, 2LP" />
+              </div>
+              <div>
+                <label for="cover">커버 이미지 URL</label>
+                <input id="cover" name="cover" type="url" placeholder="https://..." />
+              </div>
+            </div>
+            <div>
+              <label for="description">앨범 설명</label>
+              <textarea id="description" name="description" rows="4" placeholder="간단한 소개나 개인 감상을 적어주세요."></textarea>
+            </div>
+            <div>
+              <label for="tracks">트랙 목록</label>
+              <textarea id="tracks" name="tracks" rows="7" placeholder="한 줄에 한 곡씩 입력&#10;예:&#10;1. Intro&#10;2. My Favorite Song"></textarea>
+            </div>
+            <div class="form-actions">
+              <button type="submit" id="submitBtn" class="btn btn-primary">LP 저장</button>
+            </div>
+          </form>
+        </section>
+
+        <section id="collectionSection" class="card panel collection-panel">
+          <div class="panel-header collection-header">
+            <div>
+              <p class="section-kicker">Collection</p>
+              <h2>보유 LP 목록</h2>
+            </div>
+            <p id="resultMeta" class="helper-text no-margin">0개 표시됨</p>
+          </div>
+
+          <div id="emptyState" class="empty-state hidden">
+            검색 결과가 없습니다. 검색어를 바꾸거나 필터를 초기화해 보세요.
+          </div>
+          <div id="albumGrid" class="album-grid"></div>
+        </section>
+      </section>
+    </main>
+  </div>
+
+  <dialog id="detailModal" class="modal">
+    <div class="modal-card">
+      <button id="closeModalBtn" class="modal-close" aria-label="닫기">×</button>
+      <div id="modalContent"></div>
+    </div>
+  </dialog>
+
+  <template id="albumCardTemplate">
+    <article class="album-card">
+      <button class="cover-button" type="button">
+        <img class="album-cover" alt="앨범 커버" />
+      </button>
+      <div class="album-body">
+        <div>
+          <h3 class="album-title"></h3>
+          <p class="album-artist"></p>
+          <div class="album-meta"></div>
+        </div>
+        <div class="album-actions">
+          <button class="btn btn-secondary btn-small detail-btn" type="button">상세보기</button>
+          <button class="btn btn-secondary btn-small edit-btn" type="button">수정</button>
+          <button class="btn btn-danger btn-small delete-btn" type="button">삭제</button>
+        </div>
+      </div>
+    </article>
+  </template>
+
+  <script src="app.js"></script>
+</body>
+</html>
